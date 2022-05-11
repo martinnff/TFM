@@ -1,0 +1,2 @@
+"grid_size" "min_cloud_size" "path" "order"
+"1" 8 50 "/home/martin/Master/TFM/grafitos/datos2/grafos/train" 4

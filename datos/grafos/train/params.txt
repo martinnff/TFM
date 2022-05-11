@@ -1,0 +1,2 @@
+"path" "knn_conectivity" "order"
+"1" "/home/martin/Master/TFM/grafitos/datos/grafos/train" 3 6
