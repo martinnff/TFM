@@ -30,6 +30,8 @@ from torch_geometric.nn import  GATv2Conv, GraphNorm,  SAGEConv, global_mean_poo
 from ray import tune
 from ray.tune import CLIReporter
 from ray.tune.schedulers import ASHAScheduler
+from ray.tune.suggest.hyperopt import HyperOptSearch
+
 
 def split_sp(path,seed=1,split=0.9,parcela=0):
     np.random.seed(seed)
@@ -226,8 +228,8 @@ def train_graphs(config):
     criterion = torch.nn.CrossEntropyLoss(torch.tensor([1.1,1.05,1.0]).to(device))
 
 
-    trainset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/train_graphs1_90.pkl")
-    testset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/test_graphs1_90.pkl")
+    trainset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/train_graphs1_90.pkl")
+    testset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/test_graphs1_90.pkl")
 
     trainloader = DataLoader(
         trainset,
@@ -242,7 +244,7 @@ def train_graphs(config):
         drop_last=True)
 
     model.train()
-    for epoch in range(3):  # loop over the dataset multiple times
+    for epoch in range(80):  # loop over the dataset multiple times
         running_loss = 0.0
         epoch_steps = 0
         lss=0
@@ -295,21 +297,22 @@ def train_graphs(config):
 
 
 config = {
-    "hid": tune.choice([4, 8, 16,32, 64,88,128]),
-    "in_head": tune.choice([2, 4, 8, 16,20, 24]),
-    "out_features": tune.choice([2, 4, 6, 8,12,16]),
-    "s_fc1": tune.choice([256, 512, 1024, 2048,3096]),
-    "s_fc2": tune.choice([256, 512, 1024, 2048,3096]),
+    "hid": tune.choice([4, 8, 16,32, 64,88,128, 264,256]),
+    "in_head": tune.choice([2, 4, 8, 16,20, 24,32]),
+    "out_features": tune.choice([2, 4, 6, 8,12,16,24,32]),
+    "s_fc1": tune.choice([128,256, 512, 1024, 1536, 2048,3096]),
+    "s_fc2": tune.choice([128, 256, 512, 1024,1536, 2048,3096]),
     "lr": tune.loguniform(1e-5, 1e-1),
-    "wd": tune.loguniform(5e-4, 1e-6),
+    "wd": tune.loguniform(1e-6,5e-4),
     "batch_size": tune.uniform(20,1000)
 }
 
 gpus_per_trial = 0
-result = tune.run(train_graphs,
-    resources_per_trial={"cpu":4, "gpu": gpus_per_trial},
+print(tune.run(train_graphs,
+    resources_per_trial={"cpu":2, "gpu": gpus_per_trial},
     config=config,
-    num_samples=4,
+    num_samples=200,
+    search_alg = HyperOptSearch(metric="loss", mode="min"),
     scheduler=ASHAScheduler(
         metric="loss",
         mode="min",
@@ -318,22 +321,20 @@ result = tune.run(train_graphs,
         reduction_factor=2),
     progress_reporter=CLIReporter(
         parameter_columns=["hid","in_head","out_features","s_fc1","s_fc2","lr","wd"],
-        metric_columns=["loss", "accuracy", "training_iteration"]))
+        metric_columns=["loss", "accuracy", "training_iteration"])))
 
 
-analysis = tune.ExperimentAnalysis(
-
-    experiment_checkpoint_path="/home/martin/ray_results/train_graphs_2022-05-12_08-46-25/experiment_state-2022-05-12_08-46-26.json")
+#analysis = tune.ExperimentAnalysis(experiment_checkpoint_path="/home/martin/ray_results/train_graphs_2022-05-12_08-46-25/experiment_state-2022-05-12_08-46-26.json")
 
 # Get a dataframe for the last reported results of all of the trials
-df = analysis.results_df
-print(df)
+#df = analysis.results_df
+#print(df)
 # Get a dataframe for the max accuracy seen for each trial
-df = analysis.dataframe(metric="loss", mode="min")
+#df = analysis.dataframe(metric="loss", mode="min")
 
 # Get a dict mapping {trial logdir -> dataframes} for all trials in the experiment.
-all_dataframes = analysis.trial_dataframes
-print(all_dataframes)
+#all_dataframes = analysis.trial_dataframes
+#print(all_dataframes)
 # Get a list of trials
-trials = analysis.trials
-print(trials)
+#trials = analysis.trials
+#print(trials)
