@@ -148,7 +148,8 @@ class GAT(torch.nn.Module):
                  in_head = 16,
                  out_features = 4,
                  s_fc1 = 2048,
-                 s_fc2 = 1024):
+                 s_fc2 = 1024,
+                 cv2 = 1):
         super(GAT, self).__init__()
 
         self.hid = hid
@@ -157,9 +158,12 @@ class GAT(torch.nn.Module):
         self.out_features = out_features
         self.s_fc1 = s_fc1
         self.s_fc2 = s_fc2
+        self.cv2 = cv2
 
         self.conv1 =  GATv2Conv(self.in_features, self.out_features,edge_dim=1,heads=self.in_head,concat=True)
-        self.conv2 =  SAGEConv(self.out_features*self.in_head, self.hid,normalize=False)
+        if(self.cv2==1):
+            self.conv2 =  GATv2Conv(self.out_features*self.in_head, self.out_features*self.in_head,edge_dim=1,heads=self.in_head,concat=False)
+        self.conv3 =  SAGEConv(self.out_features*self.in_head, self.hid,normalize=False)
         self.norm1=GraphNorm(self.out_features*self.in_head)
         self.fc1 = nn.Linear(self.hid*2,self.s_fc1)
         self.fc2 = nn.Linear(self.s_fc1,self.s_fc2)
@@ -181,7 +185,14 @@ class GAT(torch.nn.Module):
         x = self.norm1(x,batch)
         x = F.dropout(x, p=dp, training=self.training)
 
-        x = self.conv2(x,edge_index)
+        if(self.cv2==1):
+            x = self.conv2(x,edge_index,edge_attr)
+            x = F.relu(x)
+            x = F.dropout(x, p=dp, training=self.training)
+
+
+
+        x = self.conv3(x,edge_index)
         x = F.relu(x)
         x = F.dropout(x, p=dp, training=self.training)
 
@@ -230,7 +241,8 @@ def train_graphs(config):
 
     trainset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/train_graphs1_90.pkl")
     testset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/test_graphs1_90.pkl")
-
+    # trainset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/train_graphs1_90.pkl")
+    # testset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/test_graphs1_90.pkl")
     trainloader = DataLoader(
         trainset,
         batch_size=int(config["batch_size"]),
@@ -244,7 +256,7 @@ def train_graphs(config):
         drop_last=True)
 
     model.train()
-    for epoch in range(80):  # loop over the dataset multiple times
+    for epoch in range(1):  # loop over the dataset multiple times
         running_loss = 0.0
         epoch_steps = 0
         lss=0
@@ -304,14 +316,15 @@ config = {
     "s_fc2": tune.choice([128, 256, 512, 1024,1536, 2048,3096]),
     "lr": tune.loguniform(1e-5, 1e-1),
     "wd": tune.loguniform(1e-6,5e-4),
-    "batch_size": tune.uniform(20,1000)
+    "batch_size": tune.uniform(20,1000),
+    "cv2": tune.choice([0,1])
 }
 
 gpus_per_trial = 0
 print(tune.run(train_graphs,
     resources_per_trial={"cpu":2, "gpu": gpus_per_trial},
     config=config,
-    num_samples=200,
+    num_samples=1,
     search_alg = HyperOptSearch(metric="loss", mode="min"),
     scheduler=ASHAScheduler(
         metric="loss",
