@@ -1,0 +1,6 @@
+slurmstepd: info: Setting TMPDIR to /scratch/151339. Previous errors about TMPDIR can be discarded
+
+(Ray_tune.py:131548): Gdk-CRITICAL **: 18:22:02.181: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
+2022-05-12 18:22:13,852	WARNING function_runner.py:599 -- Function checkpointing is disabled. This may result in unexpected behavior when using checkpointing features or certain schedulers. To enable, set the train function arguments to be `func(config, checkpoint_dir=None)`.
+2022-05-12 18:22:14,128	INFO trial_runner.py:803 -- starting train_graphs_aec05c14
+2022-05-12 18:50:01,099	INFO tune.py:702 -- Total run time: 1667.26 seconds (1667.00 seconds for the tuning loop).

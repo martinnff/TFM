@@ -152,12 +152,12 @@ class GAT(torch.nn.Module):
                  cv2 = 1):
         super(GAT, self).__init__()
 
-        self.hid = hid
-        self.in_head = in_head
+        self.hid = int(64*hid)
+        self.in_head = int(4*in_head)
         self.in_features = 1
-        self.out_features = out_features
-        self.s_fc1 = s_fc1
-        self.s_fc2 = s_fc2
+        self.out_features = int(4*out_features)
+        self.s_fc1 = int(512*s_fc1) 
+        self.s_fc2 = int(512*s_fc2)
         self.cv2 = cv2
 
         self.conv1 =  GATv2Conv(self.in_features, self.out_features,edge_dim=1,heads=self.in_head,concat=True)
@@ -239,8 +239,8 @@ def train_graphs(config):
     criterion = torch.nn.CrossEntropyLoss(torch.tensor([1.1,1.05,1.0]).to(device))
 
 
-    trainset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/train_graphs1_90.pkl")
-    testset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/test_graphs1_90.pkl")
+    trainset = GraphDataset("/home/uvi/ei/mfp/TFM/datos2/train_graphs1_90.pkl")
+    testset = GraphDataset("/home/uvi/ei/mfp/TFM/datos2/test_graphs1_90.pkl")
     # trainset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/train_graphs1_90.pkl")
     # testset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/test_graphs1_90.pkl")
     trainloader = DataLoader(
@@ -256,7 +256,7 @@ def train_graphs(config):
         drop_last=True)
 
     model.train()
-    for epoch in range(1):  # loop over the dataset multiple times
+    for epoch in range(config["epoch"]):  # loop over the dataset multiple times
         running_loss = 0.0
         epoch_steps = 0
         lss=0
@@ -268,7 +268,7 @@ def train_graphs(config):
             loss = criterion(out, batch.y)
             running_loss+=loss.item()
             loss.backward()
-            if(i!=0 and i%5==0):
+            if(i!=0 and i%int(config["hold_gradient"])==0):
                 torch.nn.utils.clip_grad_norm_(model.parameters(),2)
                 optimizer.step()
                 optimizer.zero_grad()
@@ -309,22 +309,24 @@ def train_graphs(config):
 
 
 config = {
-    "hid": tune.choice([4, 8, 16,32, 64,88,128, 264,256]),
-    "in_head": tune.choice([2, 4, 8, 16,20, 24,32]),
-    "out_features": tune.choice([2, 4, 6, 8,12,16,24,32]),
-    "s_fc1": tune.choice([128,256, 512, 1024, 1536, 2048,3096]),
-    "s_fc2": tune.choice([128, 256, 512, 1024,1536, 2048,3096]),
-    "lr": tune.loguniform(1e-5, 1e-1),
-    "wd": tune.loguniform(1e-6,5e-4),
-    "batch_size": tune.uniform(20,1000),
-    "cv2": tune.choice([0,1])
+    "hid": tune.uniform(0.5,8),
+    "in_head": tune.uniform(0.5,8),
+    "out_features": tune.uniform(1,8),
+    "s_fc1": tune.uniform(0.5,8),
+    "s_fc2": tune.uniform(0.5,8),
+    "lr": tune.loguniform(1e-6, 1e-1),
+    "wd": tune.loguniform(1e-8,5e-3),
+    "batch_size": tune.choice([50,100,256,1024]),
+    "hold_gradient": tune.uniform(1,10),
+    "cv2": tune.choice([0,1]),
+    "epoch":tune.uniform(20,400)
 }
 
 gpus_per_trial = 0
 print(tune.run(train_graphs,
-    resources_per_trial={"cpu":2, "gpu": gpus_per_trial},
+    resources_per_trial={"cpu":4, "gpu": gpus_per_trial},
     config=config,
-    num_samples=1,
+    num_samples=256,
     search_alg = HyperOptSearch(metric="loss", mode="min"),
     scheduler=ASHAScheduler(
         metric="loss",
@@ -333,7 +335,7 @@ print(tune.run(train_graphs,
         grace_period=1,
         reduction_factor=2),
     progress_reporter=CLIReporter(
-        parameter_columns=["hid","in_head","out_features","s_fc1","s_fc2","lr","wd"],
+        parameter_columns=["hid","in_head","out_features","s_fc1","s_fc2","lr","wd","batch_size","cv2","epoch"],
         metric_columns=["loss", "accuracy", "training_iteration"])))
 
 
