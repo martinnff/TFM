@@ -149,7 +149,8 @@ class GAT(torch.nn.Module):
                  out_features = 4,
                  s_fc1 = 2048,
                  s_fc2 = 1024,
-                 cv2 = 1):
+                 cv2 = 1,
+		 dp=0.1):
         super(GAT, self).__init__()
 
         self.hid = int(64*hid)
@@ -159,7 +160,7 @@ class GAT(torch.nn.Module):
         self.s_fc1 = int(512*s_fc1) 
         self.s_fc2 = int(512*s_fc2)
         self.cv2 = cv2
-
+	self.dp = dp
         self.conv1 =  GATv2Conv(self.in_features, self.out_features,edge_dim=1,heads=self.in_head,concat=True)
         if(self.cv2==1):
             self.conv2 =  GATv2Conv(self.out_features*self.in_head, self.out_features*self.in_head,edge_dim=1,heads=self.in_head,concat=False)
@@ -183,29 +184,29 @@ class GAT(torch.nn.Module):
         x = self.conv1(x,edge_index,edge_attr)
         x = F.relu(x)
         x = self.norm1(x,batch)
-        x = F.dropout(x, p=dp, training=self.training)
+        x = F.dropout(x, p=self.dp, training=self.training)
 
         if(self.cv2==1):
             x = self.conv2(x,edge_index,edge_attr)
             x = F.relu(x)
-            x = F.dropout(x, p=dp, training=self.training)
+            x = F.dropout(x, p=self.dp, training=self.training)
 
 
 
         x = self.conv3(x,edge_index)
         x = F.relu(x)
-        x = F.dropout(x, p=dp, training=self.training)
+        x = F.dropout(x, p=self.dp, training=self.training)
 
         x1 = global_max_pool(x,batch)
         x2 = global_mean_pool(x,batch)
         x = torch.cat((x1,x2),1)
 
         x = self.fc1(x)
-        x = F.dropout(x, p=dp, training=self.training)
+        x = F.dropout(x, p=self.dp, training=self.training)
         x = F.relu(x)
 
         x = self.fc2(x)
-        x = F.dropout(x, p=dp, training=self.training)
+        x = F.dropout(x, p=self.dp, training=self.training)
         x = F.relu(x)
 
         x = self.fc3(x)
@@ -316,6 +317,7 @@ config = {
     "s_fc2": tune.uniform(0.5,8),
     "lr": tune.loguniform(1e-6, 1e-1),
     "wd": tune.loguniform(1e-8,5e-3),
+    "dp": tune.uniform(0.05,0.4)
     "batch_size": tune.choice([50,100,256,1024]),
     "hold_gradient": tune.uniform(1,10),
     "cv2": tune.choice([0,1]),
@@ -335,7 +337,7 @@ print(tune.run(train_graphs,
         grace_period=1,
         reduction_factor=2),
     progress_reporter=CLIReporter(
-        parameter_columns=["hid","in_head","out_features","s_fc1","s_fc2","lr","wd","batch_size","cv2","epoch"],
+        parameter_columns=["hid","in_head","out_features","s_fc1","s_fc2","lr","wd",'dp',"batch_size","cv2","epoch"],
         metric_columns=["loss", "accuracy", "training_iteration"])))
 
 
