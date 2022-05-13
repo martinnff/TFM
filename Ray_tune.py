@@ -144,23 +144,16 @@ dp=0.2
 
 
 class GAT(torch.nn.Module):
-    def __init__(self, hid = 64,
-                 in_head = 16,
-                 out_features = 4,
-                 s_fc1 = 2048,
-                 s_fc2 = 1024,
-                 cv2 = 1,
-		 dp=0.1):
+    def __init__(self, hid = 64, in_head = 16, out_features = 4, s_fc1 = 2048, s_fc2 = 1024, cv2 = 1, dp = 0.1):
         super(GAT, self).__init__()
-
         self.hid = int(64*hid)
         self.in_head = int(4*in_head)
         self.in_features = 1
         self.out_features = int(4*out_features)
-        self.s_fc1 = int(512*s_fc1) 
+        self.s_fc1 = int(512*s_fc1)
         self.s_fc2 = int(512*s_fc2)
         self.cv2 = cv2
-	self.dp = dp
+        self.dp = dp
         self.conv1 =  GATv2Conv(self.in_features, self.out_features,edge_dim=1,heads=self.in_head,concat=True)
         if(self.cv2==1):
             self.conv2 =  GATv2Conv(self.out_features*self.in_head, self.out_features*self.in_head,edge_dim=1,heads=self.in_head,concat=False)
@@ -317,7 +310,7 @@ config = {
     "s_fc2": tune.uniform(0.5,8),
     "lr": tune.loguniform(1e-6, 1e-1),
     "wd": tune.loguniform(1e-8,5e-3),
-    "dp": tune.uniform(0.05,0.4)
+    "dp": tune.uniform(0.05,0.4),
     "batch_size": tune.choice([50,100,256,1024]),
     "hold_gradient": tune.uniform(1,10),
     "cv2": tune.choice([0,1]),
