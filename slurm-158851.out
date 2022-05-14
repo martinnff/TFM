@@ -1,0 +1,24 @@
+slurmstepd: info: Setting TMPDIR to /scratch/158851. Previous errors about TMPDIR can be discarded
+
+(Ray_tune2.py:446916): Gdk-CRITICAL **: 13:00:46.410: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
+2022-05-14 13:00:55,344	WARNING function_runner.py:599 -- Function checkpointing is disabled. This may result in unexpected behavior when using checkpointing features or certain schedulers. To enable, set the train function arguments to be `func(config, checkpoint_dir=None)`.
+2022-05-14 13:00:55,593	INFO trial_runner.py:803 -- starting train_graphs_20b1057e
+2022-05-14 13:00:59,436	INFO trial_runner.py:803 -- starting train_graphs_230bf676
+2022-05-14 13:00:59,471	INFO trial_runner.py:803 -- starting train_graphs_23116232
+2022-05-14 13:00:59,501	INFO trial_runner.py:803 -- starting train_graphs_2315f568
+2022-05-14 13:00:59,521	INFO trial_runner.py:803 -- starting train_graphs_231922b0
+2022-05-14 13:00:59,540	INFO trial_runner.py:803 -- starting train_graphs_231c0dfe
+2022-05-14 13:00:59,572	INFO trial_runner.py:803 -- starting train_graphs_2320d636
+2022-05-14 13:00:59,592	INFO trial_runner.py:803 -- starting train_graphs_2323c3f0
+2022-05-14 13:00:59,640	INFO trial_runner.py:803 -- starting train_graphs_232b274e
+2022-05-14 13:00:59,671	INFO trial_runner.py:803 -- starting train_graphs_232fcba0
+2022-05-14 13:00:59,692	INFO trial_runner.py:803 -- starting train_graphs_23331daa
+2022-05-14 13:00:59,713	INFO trial_runner.py:803 -- starting train_graphs_23363fd0
+2022-05-14 13:00:59,753	INFO trial_runner.py:803 -- starting train_graphs_233c4060
+2022-05-14 13:00:59,774	INFO trial_runner.py:803 -- starting train_graphs_233f97b0
+2022-05-14 13:00:59,795	INFO trial_runner.py:803 -- starting train_graphs_2342ad06
+2022-05-14 13:00:59,835	INFO trial_runner.py:803 -- starting train_graphs_2348ca88
+2022-05-14 13:02:12,397	INFO trial_runner.py:803 -- starting train_graphs_234e9e18
+2022-05-14 13:02:30,399	INFO trial_runner.py:803 -- starting train_graphs_4e8cc0fa
+2022-05-14 13:02:52,401	INFO trial_runner.py:803 -- starting train_graphs_59488f24
+2022-05-14 13:03:52,406	INFO trial_runner.py:803 -- starting train_graphs_6664dfdc

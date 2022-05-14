@@ -233,8 +233,8 @@ def train_graphs(config):
     criterion = torch.nn.CrossEntropyLoss(torch.tensor([1.1,1.05,1.0]).to(device))
 
 
-    trainset = GraphDataset("/home/uvi/ei/mfp/TFM/datos2/train_graphs1_90.pkl")
-    testset = GraphDataset("/home/uvi/ei/mfp/TFM/datos2/test_graphs1_90.pkl")
+    trainset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/train_graphs1_90.pkl")
+    testset = GraphDataset("/home/uvi/ei/mfp/TFM/datos/test_graphs1_90.pkl")
     # trainset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/train_graphs1_90.pkl")
     # testset = GraphDataset("/home/martin/Master/TFM/grafitos/datos/test_graphs1_90.pkl")
     trainloader = DataLoader(
