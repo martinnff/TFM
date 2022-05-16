@@ -1,0 +1,5 @@
+slurmstepd: info: Setting TMPDIR to /scratch/163724. Previous errors about TMPDIR can be discarded
+  File "Ray_tune.py", line 163
+    self.conv2.apply(init_weights)
+                                 ^
+TabError: inconsistent use of tabs and spaces in indentation

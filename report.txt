@@ -1,0 +1,243 @@
+== Status ==
+Current time: 2022-05-16 13:28:30 (running for 00:00:00.19)
+Memory usage on this node: 18.4/251.3 GiB
+Using AsyncHyperBand: num_stopped=0
+Bracket: Iter 640.000: None | Iter 160.000: None | Iter 40.000: None | Iter 10.000: None
+Resources requested: 4.0/64 CPUs, 0/0 GPUs, 0.0/157.31 GiB heap, 0.0/71.41 GiB objects
+Result logdir: /home/uvi/ei/mfp/ray_results/train_graphs_2022-05-16_13-28-30
+Number of trials: 1/256 (1 RUNNING)
++-----------------------+----------+----------------------+---------+-----------+----------------+---------+---------+----------+------------+--------------+-------+----------+-----------+-----------+---------+----------+----------+----------+
+| Trial name            | status   | loc                  |     hid |   in_head |   out_features |   s_fc1 |   s_fc2 |       lr |         wd |   batch_size |   cv2 |   dp_gat |   dp_gat2 |   dp_sage |   dp_l1 |    dp_l2 |    beta1 |    beta2 |
+|-----------------------+----------+----------------------+---------+-----------+----------------+---------+---------+----------+------------+--------------+-------+----------+-----------+-----------+---------+----------+----------+----------|
+| train_graphs_4ffa3cbe | RUNNING  | 10.120.203.32:374345 | 5.73258 |   3.45205 |        3.60486 | 4.20005 |  3.3061 | 0.030483 | 0.00250723 |      641.192 |     0 | 0.068169 |   0.33936 |  0.308653 | 0.25765 | 0.169004 | 0.754778 | 0.991708 |
++-----------------------+----------+----------------------+---------+-----------+----------------+---------+---------+----------+------------+--------------+-------+----------+-----------+-----------+---------+----------+----------+----------+
+
+
+[2m[36m(train_graphs pid=374345)[0m GAT(
+[2m[36m(train_graphs pid=374345)[0m   (conv1): GATv2Conv(1, 14, heads=13)
+[2m[36m(train_graphs pid=374345)[0m   (conv3): SAGEConv(182, 366)
+[2m[36m(train_graphs pid=374345)[0m   (norm1): GraphNorm(182)
+[2m[36m(train_graphs pid=374345)[0m   (fc1): Linear(in_features=732, out_features=2150, bias=True)
+[2m[36m(train_graphs pid=374345)[0m   (fc2): Linear(in_features=2150, out_features=1692, bias=True)
+[2m[36m(train_graphs pid=374345)[0m   (fc3): Linear(in_features=1692, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374345)[0m )
+[2m[36m(train_graphs pid=374390)[0m GAT(
+[2m[36m(train_graphs pid=374390)[0m   (conv1): GATv2Conv(1, 22, heads=15)
+[2m[36m(train_graphs pid=374390)[0m   (conv3): SAGEConv(330, 274)
+[2m[36m(train_graphs pid=374390)[0m   (norm1): GraphNorm(330)
+[2m[36m(train_graphs pid=374390)[0m   (fc1): Linear(in_features=548, out_features=628, bias=True)
+[2m[36m(train_graphs pid=374390)[0m   (fc2): Linear(in_features=628, out_features=2713, bias=True)
+[2m[36m(train_graphs pid=374390)[0m   (fc3): Linear(in_features=2713, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374390)[0m )
+[2m[36m(train_graphs pid=374377)[0m GAT(
+[2m[36m(train_graphs pid=374377)[0m   (conv1): GATv2Conv(1, 8, heads=31)
+[2m[36m(train_graphs pid=374377)[0m   (conv3): SAGEConv(248, 192)
+[2m[36m(train_graphs pid=374377)[0m   (norm1): GraphNorm(248)
+[2m[36m(train_graphs pid=374377)[0m   (fc1): Linear(in_features=384, out_features=3637, bias=True)
+[2m[36m(train_graphs pid=374377)[0m   (fc2): Linear(in_features=3637, out_features=822, bias=True)
+[2m[36m(train_graphs pid=374377)[0m   (fc3): Linear(in_features=822, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374377)[0m )
+[2m[36m(train_graphs pid=374383)[0m GAT(
+[2m[36m(train_graphs pid=374383)[0m   (conv1): GATv2Conv(1, 5, heads=20)
+[2m[36m(train_graphs pid=374383)[0m   (conv3): SAGEConv(100, 479)
+[2m[36m(train_graphs pid=374383)[0m   (norm1): GraphNorm(100)
+[2m[36m(train_graphs pid=374383)[0m   (fc1): Linear(in_features=958, out_features=2462, bias=True)
+[2m[36m(train_graphs pid=374383)[0m   (fc2): Linear(in_features=2462, out_features=1914, bias=True)
+[2m[36m(train_graphs pid=374383)[0m   (fc3): Linear(in_features=1914, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374383)[0m )
+[2m[36m(train_graphs pid=374379)[0m GAT(
+[2m[36m(train_graphs pid=374379)[0m   (conv1): GATv2Conv(1, 4, heads=8)
+[2m[36m(train_graphs pid=374379)[0m   (conv2): GATv2Conv(32, 32, heads=8)
+[2m[36m(train_graphs pid=374379)[0m   (conv3): SAGEConv(32, 320)
+[2m[36m(train_graphs pid=374379)[0m   (norm1): GraphNorm(32)
+[2m[36m(train_graphs pid=374379)[0m   (fc1): Linear(in_features=640, out_features=2407, bias=True)
+[2m[36m(train_graphs pid=374379)[0m   (fc2): Linear(in_features=2407, out_features=2869, bias=True)
+[2m[36m(train_graphs pid=374379)[0m   (fc3): Linear(in_features=2869, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374379)[0m )
+[2m[36m(train_graphs pid=374396)[0m GAT(
+[2m[36m(train_graphs pid=374396)[0m   (conv1): GATv2Conv(1, 21, heads=22)
+[2m[36m(train_graphs pid=374396)[0m   (conv2): GATv2Conv(462, 462, heads=22)
+[2m[36m(train_graphs pid=374396)[0m   (conv3): SAGEConv(462, 508)
+[2m[36m(train_graphs pid=374396)[0m   (norm1): GraphNorm(462)
+[2m[36m(train_graphs pid=374396)[0m   (fc1): Linear(in_features=1016, out_features=505, bias=True)
+[2m[36m(train_graphs pid=374396)[0m   (fc2): Linear(in_features=505, out_features=378, bias=True)
+[2m[36m(train_graphs pid=374396)[0m   (fc3): Linear(in_features=378, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374396)[0m )
+[2m[36m(train_graphs pid=374385)[0m GAT(
+[2m[36m(train_graphs pid=374385)[0m   (conv1): GATv2Conv(1, 11, heads=13)
+[2m[36m(train_graphs pid=374385)[0m   (conv2): GATv2Conv(143, 143, heads=13)
+[2m[36m(train_graphs pid=374385)[0m   (conv3): SAGEConv(143, 460)
+[2m[36m(train_graphs pid=374385)[0m   (norm1): GraphNorm(143)
+[2m[36m(train_graphs pid=374385)[0m   (fc1): Linear(in_features=920, out_features=3422, bias=True)
+[2m[36m(train_graphs pid=374385)[0m   (fc2): Linear(in_features=3422, out_features=1859, bias=True)
+[2m[36m(train_graphs pid=374385)[0m   (fc3): Linear(in_features=1859, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374385)[0m )
+[2m[36m(train_graphs pid=374402)[0m GAT(
+[2m[36m(train_graphs pid=374402)[0m   (conv1): GATv2Conv(1, 12, heads=7)
+[2m[36m(train_graphs pid=374402)[0m   (conv2): GATv2Conv(84, 84, heads=7)
+[2m[36m(train_graphs pid=374402)[0m   (conv3): SAGEConv(84, 406)
+[2m[36m(train_graphs pid=374402)[0m   (norm1): GraphNorm(84)
+[2m[36m(train_graphs pid=374402)[0m   (fc1): Linear(in_features=812, out_features=2442, bias=True)
+[2m[36m(train_graphs pid=374402)[0m   (fc2): Linear(in_features=2442, out_features=3139, bias=True)
+[2m[36m(train_graphs pid=374402)[0m   (fc3): Linear(in_features=3139, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374402)[0m )
+[2m[36m(train_graphs pid=374410)[0m GAT(
+[2m[36m(train_graphs pid=374410)[0m   (conv1): GATv2Conv(1, 10, heads=5)
+[2m[36m(train_graphs pid=374410)[0m   (conv3): SAGEConv(50, 149)
+[2m[36m(train_graphs pid=374410)[0m   (norm1): GraphNorm(50)
+[2m[36m(train_graphs pid=374410)[0m   (fc1): Linear(in_features=298, out_features=2831, bias=True)
+[2m[36m(train_graphs pid=374410)[0m   (fc2): Linear(in_features=2831, out_features=2329, bias=True)
+[2m[36m(train_graphs pid=374410)[0m   (fc3): Linear(in_features=2329, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374410)[0m )
+[2m[36m(train_graphs pid=374406)[0m GAT(
+[2m[36m(train_graphs pid=374406)[0m   (conv1): GATv2Conv(1, 21, heads=29)
+[2m[36m(train_graphs pid=374406)[0m   (conv2): GATv2Conv(609, 609, heads=29)
+[2m[36m(train_graphs pid=374406)[0m   (conv3): SAGEConv(609, 241)
+[2m[36m(train_graphs pid=374406)[0m   (norm1): GraphNorm(609)
+[2m[36m(train_graphs pid=374406)[0m   (fc1): Linear(in_features=482, out_features=3764, bias=True)
+[2m[36m(train_graphs pid=374406)[0m   (fc2): Linear(in_features=3764, out_features=1510, bias=True)
+[2m[36m(train_graphs pid=374406)[0m   (fc3): Linear(in_features=1510, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374406)[0m )
+[2m[36m(train_graphs pid=374400)[0m GAT(
+[2m[36m(train_graphs pid=374400)[0m   (conv1): GATv2Conv(1, 19, heads=25)
+[2m[36m(train_graphs pid=374400)[0m   (conv2): GATv2Conv(475, 475, heads=25)
+[2m[36m(train_graphs pid=374400)[0m   (conv3): SAGEConv(475, 365)
+[2m[36m(train_graphs pid=374400)[0m   (norm1): GraphNorm(475)
+[2m[36m(train_graphs pid=374400)[0m   (fc1): Linear(in_features=730, out_features=1025, bias=True)
+[2m[36m(train_graphs pid=374400)[0m   (fc2): Linear(in_features=1025, out_features=3037, bias=True)
+[2m[36m(train_graphs pid=374400)[0m   (fc3): Linear(in_features=3037, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374400)[0m )
+== Status ==
+Current time: 2022-05-16 13:28:35 (running for 00:00:05.20)
+Memory usage on this node: 18.8/251.3 GiB
+Using AsyncHyperBand: num_stopped=0
+Bracket: Iter 640.000: None | Iter 160.000: None | Iter 40.000: None | Iter 10.000: None
+Resources requested: 64.0/64 CPUs, 0/0 GPUs, 0.0/157.31 GiB heap, 0.0/71.41 GiB objects
+Result logdir: /home/uvi/ei/mfp/ray_results/train_graphs_2022-05-16_13-28-30
+Number of trials: 16/256 (16 RUNNING)
++-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------+
+| Trial name            | status   | loc                  |      hid |   in_head |   out_features |    s_fc1 |    s_fc2 |          lr |          wd |   batch_size |   cv2 |    dp_gat |   dp_gat2 |   dp_sage |     dp_l1 |     dp_l2 |    beta1 |    beta2 |
+|-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------|
+| train_graphs_4ffa3cbe | RUNNING  | 10.120.203.32:374345 | 5.73258  |  3.45205  |        3.60486 | 4.20005  | 3.3061   | 0.030483    | 0.00250723  |     641.192  |     0 | 0.068169  | 0.33936   | 0.308653  | 0.25765   | 0.169004  | 0.754778 | 0.991708 |
+| train_graphs_52d25e6c | RUNNING  | 10.120.203.32:374377 | 3.00101  |  7.87437  |        2.11019 | 7.10408  | 1.60706  | 0.085805    | 2.32576e-06 |     384.339  |     0 | 0.351105  | 0.381658  | 0.132528  | 0.214307  | 0.425268  | 0.81594  | 0.614186 |
+| train_graphs_52d7d2a2 | RUNNING  | 10.120.203.32:374379 | 5.01145  |  2.03504  |        1.21048 | 4.70261  | 5.60353  | 0.00150921  | 5.32006e-08 |     826.668  |     1 | 0.213082  | 0.449308  | 0.0197086 | 0.293219  | 0.358175  | 0.929501 | 0.686483 |
+| train_graphs_52dbc524 | RUNNING  | 10.120.203.32:374383 | 7.49453  |  5.20748  |        1.27228 | 4.81042  | 3.73981  | 0.000975005 | 0.00132453  |     382.13   |     0 | 0.097251  | 0.131701  | 0.155155  | 0.217659  | 0.431647  | 0.641987 | 0.647504 |
+| train_graphs_52df61a2 | RUNNING  | 10.120.203.32:374385 | 7.20027  |  3.45862  |        2.99696 | 6.68379  | 3.63109  | 0.041236    | 4.23045e-05 |     905.309  |     1 | 0.241837  | 0.0542741 | 0.136032  | 0.298521  | 0.201879  | 0.783105 | 0.851796 |
+| train_graphs_52e21d3e | RUNNING  | 10.120.203.32:374390 | 4.29229  |  3.93038  |        5.65507 | 1.22847  | 5.3001   | 2.19748e-06 | 0.000309435 |     701.569  |     0 | 0.0862666 | 0.215392  | 0.254304  | 0.105137  | 0.0219333 | 0.87934  | 0.851828 |
+| train_graphs_52e81770 | RUNNING  | 10.120.203.32:374396 | 7.93787  |  5.68038  |        5.41123 | 0.987998 | 0.739162 | 0.000170213 | 1.63163e-07 |     470.546  |     1 | 0.0252486 | 0.172203  | 0.258625  | 0.0580625 | 0.267099  | 0.577467 | 0.927111 |
+| train_graphs_52ed544c | RUNNING  | 10.120.203.32:374400 | 5.70458  |  6.25272  |        4.99867 | 2.00276  | 5.93184  | 0.00515627  | 1.00351e-09 |     289.85   |     1 | 0.393795  | 0.419178  | 0.433935  | 0.0776219 | 0.179752  | 0.808096 | 0.893704 |
+| train_graphs_52f0212c | RUNNING  | 10.120.203.32:374402 | 6.34735  |  1.98292  |        3.19745 | 4.77088  | 6.13195  | 0.00430672  | 2.45583e-08 |     593.909  |     1 | 0.239362  | 0.0220768 | 0.212009  | 0.209982  | 0.353696  | 0.813084 | 0.741288 |
+| train_graphs_52f52a00 | RUNNING  | 10.120.203.32:374406 | 3.77756  |  7.29773  |        5.27478 | 7.35211  | 2.95073  | 1.03373e-07 | 7.17175e-08 |     355.591  |     1 | 0.36488   | 0.311705  | 0.271976  | 0.198822  | 0.392863  | 0.649448 | 0.879253 |
+| train_graphs_52f8ad74 | RUNNING  | 10.120.203.32:374410 | 2.32946  |  1.26715  |        2.66199 | 5.53003  | 4.5499   | 0.000135607 | 1.3787e-06  |     976.571  |     0 | 0.22883   | 0.276486  | 0.385581  | 0.015813  | 0.0110229 | 0.851572 | 0.769418 |
+| train_graphs_52fd1c38 | RUNNING  | 10.120.203.32:374414 | 1.86135  |  6.06547  |        6.72331 | 2.59846  | 5.62042  | 0.0074303   | 2.21543e-07 |      72.9372 |     0 | 0.377065  | 0.219061  | 0.258473  | 0.181799  | 0.274497  | 0.5822   | 0.708311 |
+| train_graphs_53012918 | RUNNING  | 10.120.203.32:374421 | 0.953925 |  2.9585   |        3.54118 | 7.54256  | 1.9968   | 0.000208855 | 0.00173269  |     277.104  |     1 | 0.311098  | 0.216279  | 0.391961  | 0.12881   | 0.0290752 | 0.541139 | 0.94654  |
+| train_graphs_5308d442 | RUNNING  | 10.120.203.32:374425 | 2.18474  |  4.33118  |        6.97843 | 3.78501  | 4.41168  | 1.37005e-06 | 9.56518e-08 |      65.7744 |     0 | 0.144852  | 0.13205   | 0.217176  | 0.396039  | 0.102174  | 0.954576 | 0.929197 |
+| train_graphs_530c3d4e | RUNNING  | 10.120.203.32:374427 | 0.802233 |  5.59187  |        3.34959 | 4.86476  | 5.8071   | 2.17698e-07 | 7.62471e-05 |     632.673  |     1 | 0.0804269 | 0.197086  | 0.44324   | 0.0313967 | 0.25178   | 0.858281 | 0.667512 |
+| train_graphs_530fb3ca | RUNNING  | 10.120.203.32:374429 | 5.11596  |  0.645878 |        6.00486 | 3.64909  | 5.59609  | 1.64553e-06 | 1.9277e-09  |     411.826  |     1 | 0.130094  | 0.347531  | 0.390653  | 0.184866  | 0.0368482 | 0.700963 | 0.570852 |
++-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------+
+
+
+[2m[36m(train_graphs pid=374421)[0m GAT(
+[2m[36m(train_graphs pid=374421)[0m   (conv1): GATv2Conv(1, 14, heads=11)
+[2m[36m(train_graphs pid=374421)[0m   (conv2): GATv2Conv(154, 154, heads=11)
+[2m[36m(train_graphs pid=374421)[0m   (conv3): SAGEConv(154, 61)
+[2m[36m(train_graphs pid=374421)[0m   (norm1): GraphNorm(154)
+[2m[36m(train_graphs pid=374421)[0m   (fc1): Linear(in_features=122, out_features=3861, bias=True)
+[2m[36m(train_graphs pid=374421)[0m   (fc2): Linear(in_features=3861, out_features=1022, bias=True)
+[2m[36m(train_graphs pid=374421)[0m   (fc3): Linear(in_features=1022, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374421)[0m )
+[2m[36m(train_graphs pid=374425)[0m GAT(
+[2m[36m(train_graphs pid=374425)[0m   (conv1): GATv2Conv(1, 27, heads=17)
+[2m[36m(train_graphs pid=374425)[0m   (conv3): SAGEConv(459, 139)
+[2m[36m(train_graphs pid=374425)[0m   (norm1): GraphNorm(459)
+[2m[36m(train_graphs pid=374425)[0m   (fc1): Linear(in_features=278, out_features=1937, bias=True)
+[2m[36m(train_graphs pid=374425)[0m   (fc2): Linear(in_features=1937, out_features=2258, bias=True)
+[2m[36m(train_graphs pid=374425)[0m   (fc3): Linear(in_features=2258, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374425)[0m )
+[2m[36m(train_graphs pid=374414)[0m GAT(
+[2m[36m(train_graphs pid=374414)[0m   (conv1): GATv2Conv(1, 26, heads=24)
+[2m[36m(train_graphs pid=374414)[0m   (conv3): SAGEConv(624, 119)
+[2m[36m(train_graphs pid=374414)[0m   (norm1): GraphNorm(624)
+[2m[36m(train_graphs pid=374414)[0m   (fc1): Linear(in_features=238, out_features=1330, bias=True)
+[2m[36m(train_graphs pid=374414)[0m   (fc2): Linear(in_features=1330, out_features=2877, bias=True)
+[2m[36m(train_graphs pid=374414)[0m   (fc3): Linear(in_features=2877, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374414)[0m )
+[2m[36m(train_graphs pid=374429)[0m GAT(
+[2m[36m(train_graphs pid=374429)[0m   (conv1): GATv2Conv(1, 24, heads=2)
+[2m[36m(train_graphs pid=374429)[0m   (conv2): GATv2Conv(48, 48, heads=2)
+[2m[36m(train_graphs pid=374429)[0m   (conv3): SAGEConv(48, 327)
+[2m[36m(train_graphs pid=374429)[0m   (norm1): GraphNorm(48)
+[2m[36m(train_graphs pid=374429)[0m   (fc1): Linear(in_features=654, out_features=1868, bias=True)
+[2m[36m(train_graphs pid=374429)[0m   (fc2): Linear(in_features=1868, out_features=2865, bias=True)
+[2m[36m(train_graphs pid=374429)[0m   (fc3): Linear(in_features=2865, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374429)[0m )
+[2m[36m(train_graphs pid=374427)[0m GAT(
+[2m[36m(train_graphs pid=374427)[0m   (conv1): GATv2Conv(1, 13, heads=22)
+[2m[36m(train_graphs pid=374427)[0m   (conv2): GATv2Conv(286, 286, heads=22)
+[2m[36m(train_graphs pid=374427)[0m   (conv3): SAGEConv(286, 51)
+[2m[36m(train_graphs pid=374427)[0m   (norm1): GraphNorm(286)
+[2m[36m(train_graphs pid=374427)[0m   (fc1): Linear(in_features=102, out_features=2490, bias=True)
+[2m[36m(train_graphs pid=374427)[0m   (fc2): Linear(in_features=2490, out_features=2973, bias=True)
+[2m[36m(train_graphs pid=374427)[0m   (fc3): Linear(in_features=2973, out_features=3, bias=True)
+[2m[36m(train_graphs pid=374427)[0m )
+== Status ==
+Current time: 2022-05-16 13:28:45 (running for 00:00:14.80)
+Memory usage on this node: 22.3/251.3 GiB
+Using AsyncHyperBand: num_stopped=0
+Bracket: Iter 640.000: None | Iter 160.000: None | Iter 40.000: None | Iter 10.000: None
+Resources requested: 64.0/64 CPUs, 0/0 GPUs, 0.0/157.31 GiB heap, 0.0/71.41 GiB objects
+Result logdir: /home/uvi/ei/mfp/ray_results/train_graphs_2022-05-16_13-28-30
+Number of trials: 17/256 (1 PENDING, 16 RUNNING)
++-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------+
+| Trial name            | status   | loc                  |      hid |   in_head |   out_features |    s_fc1 |    s_fc2 |          lr |          wd |   batch_size |   cv2 |    dp_gat |   dp_gat2 |   dp_sage |     dp_l1 |     dp_l2 |    beta1 |    beta2 |
+|-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------|
+| train_graphs_4ffa3cbe | RUNNING  | 10.120.203.32:374345 | 5.73258  |  3.45205  |        3.60486 | 4.20005  | 3.3061   | 0.030483    | 0.00250723  |     641.192  |     0 | 0.068169  | 0.33936   | 0.308653  | 0.25765   | 0.169004  | 0.754778 | 0.991708 |
+| train_graphs_52d25e6c | RUNNING  | 10.120.203.32:374377 | 3.00101  |  7.87437  |        2.11019 | 7.10408  | 1.60706  | 0.085805    | 2.32576e-06 |     384.339  |     0 | 0.351105  | 0.381658  | 0.132528  | 0.214307  | 0.425268  | 0.81594  | 0.614186 |
+| train_graphs_52d7d2a2 | RUNNING  | 10.120.203.32:374379 | 5.01145  |  2.03504  |        1.21048 | 4.70261  | 5.60353  | 0.00150921  | 5.32006e-08 |     826.668  |     1 | 0.213082  | 0.449308  | 0.0197086 | 0.293219  | 0.358175  | 0.929501 | 0.686483 |
+| train_graphs_52dbc524 | RUNNING  | 10.120.203.32:374383 | 7.49453  |  5.20748  |        1.27228 | 4.81042  | 3.73981  | 0.000975005 | 0.00132453  |     382.13   |     0 | 0.097251  | 0.131701  | 0.155155  | 0.217659  | 0.431647  | 0.641987 | 0.647504 |
+| train_graphs_52df61a2 | RUNNING  | 10.120.203.32:374385 | 7.20027  |  3.45862  |        2.99696 | 6.68379  | 3.63109  | 0.041236    | 4.23045e-05 |     905.309  |     1 | 0.241837  | 0.0542741 | 0.136032  | 0.298521  | 0.201879  | 0.783105 | 0.851796 |
+| train_graphs_52e21d3e | RUNNING  | 10.120.203.32:374390 | 4.29229  |  3.93038  |        5.65507 | 1.22847  | 5.3001   | 2.19748e-06 | 0.000309435 |     701.569  |     0 | 0.0862666 | 0.215392  | 0.254304  | 0.105137  | 0.0219333 | 0.87934  | 0.851828 |
+| train_graphs_52e81770 | RUNNING  | 10.120.203.32:374396 | 7.93787  |  5.68038  |        5.41123 | 0.987998 | 0.739162 | 0.000170213 | 1.63163e-07 |     470.546  |     1 | 0.0252486 | 0.172203  | 0.258625  | 0.0580625 | 0.267099  | 0.577467 | 0.927111 |
+| train_graphs_52ed544c | RUNNING  | 10.120.203.32:374400 | 5.70458  |  6.25272  |        4.99867 | 2.00276  | 5.93184  | 0.00515627  | 1.00351e-09 |     289.85   |     1 | 0.393795  | 0.419178  | 0.433935  | 0.0776219 | 0.179752  | 0.808096 | 0.893704 |
+| train_graphs_52f0212c | RUNNING  | 10.120.203.32:374402 | 6.34735  |  1.98292  |        3.19745 | 4.77088  | 6.13195  | 0.00430672  | 2.45583e-08 |     593.909  |     1 | 0.239362  | 0.0220768 | 0.212009  | 0.209982  | 0.353696  | 0.813084 | 0.741288 |
+| train_graphs_52f52a00 | RUNNING  | 10.120.203.32:374406 | 3.77756  |  7.29773  |        5.27478 | 7.35211  | 2.95073  | 1.03373e-07 | 7.17175e-08 |     355.591  |     1 | 0.36488   | 0.311705  | 0.271976  | 0.198822  | 0.392863  | 0.649448 | 0.879253 |
+| train_graphs_52f8ad74 | RUNNING  | 10.120.203.32:374410 | 2.32946  |  1.26715  |        2.66199 | 5.53003  | 4.5499   | 0.000135607 | 1.3787e-06  |     976.571  |     0 | 0.22883   | 0.276486  | 0.385581  | 0.015813  | 0.0110229 | 0.851572 | 0.769418 |
+| train_graphs_52fd1c38 | RUNNING  | 10.120.203.32:374414 | 1.86135  |  6.06547  |        6.72331 | 2.59846  | 5.62042  | 0.0074303   | 2.21543e-07 |      72.9372 |     0 | 0.377065  | 0.219061  | 0.258473  | 0.181799  | 0.274497  | 0.5822   | 0.708311 |
+| train_graphs_53012918 | RUNNING  | 10.120.203.32:374421 | 0.953925 |  2.9585   |        3.54118 | 7.54256  | 1.9968   | 0.000208855 | 0.00173269  |     277.104  |     1 | 0.311098  | 0.216279  | 0.391961  | 0.12881   | 0.0290752 | 0.541139 | 0.94654  |
+| train_graphs_5308d442 | RUNNING  | 10.120.203.32:374425 | 2.18474  |  4.33118  |        6.97843 | 3.78501  | 4.41168  | 1.37005e-06 | 9.56518e-08 |      65.7744 |     0 | 0.144852  | 0.13205   | 0.217176  | 0.396039  | 0.102174  | 0.954576 | 0.929197 |
+| train_graphs_530c3d4e | RUNNING  | 10.120.203.32:374427 | 0.802233 |  5.59187  |        3.34959 | 4.86476  | 5.8071   | 2.17698e-07 | 7.62471e-05 |     632.673  |     1 | 0.0804269 | 0.197086  | 0.44324   | 0.0313967 | 0.25178   | 0.858281 | 0.667512 |
+| train_graphs_530fb3ca | RUNNING  | 10.120.203.32:374429 | 5.11596  |  0.645878 |        6.00486 | 3.64909  | 5.59609  | 1.64553e-06 | 1.9277e-09  |     411.826  |     1 | 0.130094  | 0.347531  | 0.390653  | 0.184866  | 0.0368482 | 0.700963 | 0.570852 |
+| train_graphs_55cb3972 | PENDING  |                      | 4.02544  |  5.28048  |        4.03996 | 4.67361  | 5.68133  | 6.86812e-07 | 1.77499e-06 |     455.964  |     0 | 0.449065  | 0.138194  | 0.152799  | 0.0572926 | 0.435848  | 0.81546  | 0.615471 |
++-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------+
+
+
+== Status ==
+Current time: 2022-05-16 13:28:50 (running for 00:00:19.81)
+Memory usage on this node: 24.4/251.3 GiB
+Using AsyncHyperBand: num_stopped=0
+Bracket: Iter 640.000: None | Iter 160.000: None | Iter 40.000: None | Iter 10.000: None
+Resources requested: 64.0/64 CPUs, 0/0 GPUs, 0.0/157.31 GiB heap, 0.0/71.41 GiB objects
+Result logdir: /home/uvi/ei/mfp/ray_results/train_graphs_2022-05-16_13-28-30
+Number of trials: 17/256 (1 PENDING, 16 RUNNING)
++-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------+
+| Trial name            | status   | loc                  |      hid |   in_head |   out_features |    s_fc1 |    s_fc2 |          lr |          wd |   batch_size |   cv2 |    dp_gat |   dp_gat2 |   dp_sage |     dp_l1 |     dp_l2 |    beta1 |    beta2 |
+|-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------|
+| train_graphs_4ffa3cbe | RUNNING  | 10.120.203.32:374345 | 5.73258  |  3.45205  |        3.60486 | 4.20005  | 3.3061   | 0.030483    | 0.00250723  |     641.192  |     0 | 0.068169  | 0.33936   | 0.308653  | 0.25765   | 0.169004  | 0.754778 | 0.991708 |
+| train_graphs_52d25e6c | RUNNING  | 10.120.203.32:374377 | 3.00101  |  7.87437  |        2.11019 | 7.10408  | 1.60706  | 0.085805    | 2.32576e-06 |     384.339  |     0 | 0.351105  | 0.381658  | 0.132528  | 0.214307  | 0.425268  | 0.81594  | 0.614186 |
+| train_graphs_52d7d2a2 | RUNNING  | 10.120.203.32:374379 | 5.01145  |  2.03504  |        1.21048 | 4.70261  | 5.60353  | 0.00150921  | 5.32006e-08 |     826.668  |     1 | 0.213082  | 0.449308  | 0.0197086 | 0.293219  | 0.358175  | 0.929501 | 0.686483 |
+| train_graphs_52dbc524 | RUNNING  | 10.120.203.32:374383 | 7.49453  |  5.20748  |        1.27228 | 4.81042  | 3.73981  | 0.000975005 | 0.00132453  |     382.13   |     0 | 0.097251  | 0.131701  | 0.155155  | 0.217659  | 0.431647  | 0.641987 | 0.647504 |
+| train_graphs_52df61a2 | RUNNING  | 10.120.203.32:374385 | 7.20027  |  3.45862  |        2.99696 | 6.68379  | 3.63109  | 0.041236    | 4.23045e-05 |     905.309  |     1 | 0.241837  | 0.0542741 | 0.136032  | 0.298521  | 0.201879  | 0.783105 | 0.851796 |
+| train_graphs_52e21d3e | RUNNING  | 10.120.203.32:374390 | 4.29229  |  3.93038  |        5.65507 | 1.22847  | 5.3001   | 2.19748e-06 | 0.000309435 |     701.569  |     0 | 0.0862666 | 0.215392  | 0.254304  | 0.105137  | 0.0219333 | 0.87934  | 0.851828 |
+| train_graphs_52e81770 | RUNNING  | 10.120.203.32:374396 | 7.93787  |  5.68038  |        5.41123 | 0.987998 | 0.739162 | 0.000170213 | 1.63163e-07 |     470.546  |     1 | 0.0252486 | 0.172203  | 0.258625  | 0.0580625 | 0.267099  | 0.577467 | 0.927111 |
+| train_graphs_52ed544c | RUNNING  | 10.120.203.32:374400 | 5.70458  |  6.25272  |        4.99867 | 2.00276  | 5.93184  | 0.00515627  | 1.00351e-09 |     289.85   |     1 | 0.393795  | 0.419178  | 0.433935  | 0.0776219 | 0.179752  | 0.808096 | 0.893704 |
+| train_graphs_52f0212c | RUNNING  | 10.120.203.32:374402 | 6.34735  |  1.98292  |        3.19745 | 4.77088  | 6.13195  | 0.00430672  | 2.45583e-08 |     593.909  |     1 | 0.239362  | 0.0220768 | 0.212009  | 0.209982  | 0.353696  | 0.813084 | 0.741288 |
+| train_graphs_52f52a00 | RUNNING  | 10.120.203.32:374406 | 3.77756  |  7.29773  |        5.27478 | 7.35211  | 2.95073  | 1.03373e-07 | 7.17175e-08 |     355.591  |     1 | 0.36488   | 0.311705  | 0.271976  | 0.198822  | 0.392863  | 0.649448 | 0.879253 |
+| train_graphs_52f8ad74 | RUNNING  | 10.120.203.32:374410 | 2.32946  |  1.26715  |        2.66199 | 5.53003  | 4.5499   | 0.000135607 | 1.3787e-06  |     976.571  |     0 | 0.22883   | 0.276486  | 0.385581  | 0.015813  | 0.0110229 | 0.851572 | 0.769418 |
+| train_graphs_52fd1c38 | RUNNING  | 10.120.203.32:374414 | 1.86135  |  6.06547  |        6.72331 | 2.59846  | 5.62042  | 0.0074303   | 2.21543e-07 |      72.9372 |     0 | 0.377065  | 0.219061  | 0.258473  | 0.181799  | 0.274497  | 0.5822   | 0.708311 |
+| train_graphs_53012918 | RUNNING  | 10.120.203.32:374421 | 0.953925 |  2.9585   |        3.54118 | 7.54256  | 1.9968   | 0.000208855 | 0.00173269  |     277.104  |     1 | 0.311098  | 0.216279  | 0.391961  | 0.12881   | 0.0290752 | 0.541139 | 0.94654  |
+| train_graphs_5308d442 | RUNNING  | 10.120.203.32:374425 | 2.18474  |  4.33118  |        6.97843 | 3.78501  | 4.41168  | 1.37005e-06 | 9.56518e-08 |      65.7744 |     0 | 0.144852  | 0.13205   | 0.217176  | 0.396039  | 0.102174  | 0.954576 | 0.929197 |
+| train_graphs_530c3d4e | RUNNING  | 10.120.203.32:374427 | 0.802233 |  5.59187  |        3.34959 | 4.86476  | 5.8071   | 2.17698e-07 | 7.62471e-05 |     632.673  |     1 | 0.0804269 | 0.197086  | 0.44324   | 0.0313967 | 0.25178   | 0.858281 | 0.667512 |
+| train_graphs_530fb3ca | RUNNING  | 10.120.203.32:374429 | 5.11596  |  0.645878 |        6.00486 | 3.64909  | 5.59609  | 1.64553e-06 | 1.9277e-09  |     411.826  |     1 | 0.130094  | 0.347531  | 0.390653  | 0.184866  | 0.0368482 | 0.700963 | 0.570852 |
+| train_graphs_55cb3972 | PENDING  |                      | 4.02544  |  5.28048  |        4.03996 | 4.67361  | 5.68133  | 6.86812e-07 | 1.77499e-06 |     455.964  |     0 | 0.449065  | 0.138194  | 0.152799  | 0.0572926 | 0.435848  | 0.81546  | 0.615471 |
++-----------------------+----------+----------------------+----------+-----------+----------------+----------+----------+-------------+-------------+--------------+-------+-----------+-----------+-----------+-----------+-----------+----------+----------+
+
