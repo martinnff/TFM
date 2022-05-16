@@ -1,5 +1,0 @@
-slurmstepd: info: Setting TMPDIR to /scratch/154259. Previous errors about TMPDIR can be discarded
-  File "Ray_tune.py", line 163
-    self.dp = dp
-               ^
-TabError: inconsistent use of tabs and spaces in indentation

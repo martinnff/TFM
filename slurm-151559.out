@@ -1,7 +1,0 @@
-slurmstepd: info: Setting TMPDIR to /scratch/151559. Previous errors about TMPDIR can be discarded
-
-(Ray_tune.py:136198): Gdk-CRITICAL **: 19:17:54.542: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
-Traceback (most recent call last):
-  File "Ray_tune.py", line 315, in <module>
-    "s_fc1": tune.choice(1,6),
-TypeError: choice() takes 1 positional argument but 2 were given
