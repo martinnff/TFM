@@ -143,32 +143,43 @@ dp=0.2
 
 
 class GAT(torch.nn.Module):
-    def __init__(self, hid = 1, in_head =2, out_features = 1, s_fc1 = 2, s_fc2 = 1, cv2 = 0, dp_gat = 0.1,dp_gat2=0.1, dp_sage = 0.1,dp_l1=0.1,dp_l2=0.1):
+    def __init__(self, hid = 1,hid2=1, in_head =2, out_features = 1, s_fc1 = 2, s_fc2 = 1, cv2 = 0,fc2=1, dp_gat = 0.1, dp_sage=0.1, dp_sage2 = 0.1, dp_l1=0.1, dp_l2=0.1):
         super(GAT, self).__init__()
         self.hid = int(64*hid)
+        self.hid2 = int(64*hid2)
         self.in_head = int(4*in_head)
         self.in_features = 1
         self.out_features = int(4*out_features)
         self.s_fc1 = int(512*s_fc1)
         self.s_fc2 = int(512*s_fc2)
         self.cv2 = cv2
+        self.fc_2 = fc2
         self.dp_gat = dp_gat
-        self.dp_gat2 = dp_gat2
         self.dp_sage = dp_sage
+        self.dp_sage2 = dp_sage
         self.dp_l1 = dp_l1
         self.dp_l2 = dp_l2
         self.conv1 =  GATv2Conv(self.in_features, self.out_features,edge_dim=1,heads=self.in_head,concat=True)
         if(self.cv2==1):
-            self.conv2 =  GATv2Conv(self.out_features*self.in_head, self.out_features*self.in_head,edge_dim=1,heads=self.in_head,concat=False)
+            self.conv2 =  SAGEConv(self.out_features*self.in_head, self.hid2,normalize=False)
             self.conv2.apply(init_weights)
-        self.conv3 =  SAGEConv(self.out_features*self.in_head, self.hid,normalize=False)
+            self.conv3 = SAGEConv(self.hid2,self.hid,normalize=False)
+            self.conv3.apply(init_weights)
+        if(self.cv2==0):
+            self.conv3 =  SAGEConv(self.out_features*self.in_head, self.hid,normalize=False)
+            self.conv3.apply(init_weights)
         self.norm1=GraphNorm(self.out_features*self.in_head)
-        self.fc1 = nn.Linear(self.hid*2,self.s_fc1)
-        self.fc2 = nn.Linear(self.s_fc1,self.s_fc2)
-        self.fc3 = nn.Linear(self.s_fc2,3)
+        if(self.fc_2==1):
+            self.fc1 = nn.Linear(self.hid*2,self.s_fc1)
+            self.fc2 = nn.Linear(self.s_fc1,self.s_fc2)
+            self.fc3 = nn.Linear(self.s_fc2,3)
+            self.fc2.apply(init_weights)
+        if(self.fc_2==0):
+            self.fc1 = nn.Linear(self.hid*2,self.s_fc1)
+            self.fc3 = nn.Linear(self.s_fc1,3)
+
         self.conv1.apply(init_weights)
         self.fc1.apply(init_weights)
-        self.fc2.apply(init_weights)
         self.fc3.apply(init_weights)
 
 
@@ -183,30 +194,36 @@ class GAT(torch.nn.Module):
         x = F.dropout(x, p=self.dp_gat, training=self.training)
 
         if(self.cv2==1):
-            x = self.conv2(x,edge_index,edge_attr)
+            x = self.conv2(x,edge_index)
             x = F.relu(x)
-            x = F.dropout(x, p=self.dp_gat2, training=self.training)
-
-
-
-        x = self.conv3(x,edge_index)
-        x = F.relu(x)
-        x = F.dropout(x, p=self.dp_sage, training=self.training)
+            x = F.dropout(x, p=self.dp_sage, training=self.training)
+            x = self.conv3(x,edge_index)
+            x = F.relu(x)
+            x = F.dropout(x, p=self.dp_sage2, training=self.training)
+        if(self.cv2==0):
+            x = self.conv3(x,edge_index)
+            x = F.relu(x)
+            x = F.dropout(x, p=self.dp_sage, training=self.training)
 
         x1 = global_max_pool(x,batch)
         x2 = global_mean_pool(x,batch)
         x = torch.cat((x1,x2),1)
+        if(self.fc_2==1):
+            x = self.fc1(x)
+            x = F.dropout(x, p=self.dp_l1, training=self.training)
+            x = F.relu(x)
 
-        x = self.fc1(x)
-        x = F.dropout(x, p=self.dp_l1, training=self.training)
-        x = F.relu(x)
+            x = self.fc2(x)
+            x = F.dropout(x, p=self.dp_l2, training=self.training)
+            x = F.relu(x)
 
-        x = self.fc2(x)
-        x = F.dropout(x, p=self.dp_l2, training=self.training)
-        x = F.relu(x)
+            x = self.fc3(x)
+        if(self.fc_2==0):
+            x = self.fc1(x)
+            x = F.dropout(x, p=self.dp_l1, training=self.training)
+            x = F.relu(x)
 
-        x = self.fc3(x)
-
+            x = self.fc3(x)
         return x
 
 
@@ -222,14 +239,16 @@ def train_graphs(config):
             net = nn.DataParallel(net)
 
     model = GAT(config['hid'],
+            config['hid2'],
             config['in_head'],
             config['out_features'],
             config['s_fc1'],
             config['s_fc2'],
             config['cv2'],
+            config['fc2'],
             config['dp_gat'],
-            config['dp_gat2'],
             config['dp_sage'],
+            config['dp_sage2'],
 	    config['dp_l1'],
             config['dp_l2'])
 
@@ -313,6 +332,7 @@ def train_graphs(config):
 
 config = {
     "hid": tune.uniform(1,8),
+    "hid2": tune.uniform(1,8),
     "beta1": tune.uniform(0.5, 0.999),
     "beta2": tune.uniform(0.5, 0.999),
     "in_head": tune.uniform(0.5,8),
@@ -322,18 +342,19 @@ config = {
     "lr": tune.loguniform(1e-7, 1e-1),
     "wd": tune.loguniform(1e-9,5e-3),
     "dp_gat": tune.uniform(0.01,0.45),
-    "dp_gat2": tune.uniform(0.01,0.45),
     "dp_sage": tune.uniform(0.01,0.45),
+    "dp_sage2": tune.uniform(0.01,0.45),
     "batch_size": tune.uniform(20,1000),
     "dp_l1": tune.uniform(0.01,0.45),
     "dp_l2": tune.uniform(0.01,0.45),
     "hold_gradient": tune.uniform(1,10),
-    "cv2": tune.choice([0,1])
+    "cv2": tune.choice([0,1]),
+    "fc2": tune.choice([0,1])
 }
 
 gpus_per_trial = 0
 print(tune.run(train_graphs,
-    resources_per_trial={"cpu":4, "gpu": gpus_per_trial},
+    resources_per_trial={"cpu":6, "gpu": gpus_per_trial},
     config=config,
     num_samples=256,
     scheduler = AsyncHyperBandScheduler(metric="loss", mode="min", grace_period=10, max_t=1000),
@@ -341,7 +362,7 @@ print(tune.run(train_graphs,
         metric="loss",
         mode="min"),
     progress_reporter=CLIReporter(
-        parameter_columns=["hid","in_head","out_features","s_fc1","s_fc2","lr","wd","batch_size","cv2","dp_gat","dp_gat2","dp_sage","dp_l1","dp_l2","beta1","beta2"],
+        parameter_columns=["hid","hid2","in_head","out_features","s_fc1","s_fc2","lr","wd","batch_size","cv2","fc2","dp_gat","dp_sage","dp_sage2","dp_l1","dp_l2","beta1","beta2"],
         metric_columns=["loss", "accuracy", "training_iteration"])))
 
 

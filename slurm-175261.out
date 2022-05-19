@@ -1,0 +1,74 @@
+slurmstepd: info: Setting TMPDIR to /scratch/175261. Previous errors about TMPDIR can be discarded
+
+(Ray_tune.py:1637309): Gdk-CRITICAL **: 10:10:23.494: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
+2022-05-19 10:10:30,823	WARNING function_runner.py:599 -- Function checkpointing is disabled. This may result in unexpected behavior when using checkpointing features or certain schedulers. To enable, set the train function arguments to be `func(config, checkpoint_dir=None)`.
+2022-05-19 10:10:31,048	INFO trial_runner.py:803 -- starting train_graphs_26745900
+[2m[36m(train_graphs pid=1639538)[0m /home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch/cuda/__init__.py:145: UserWarning: 
+[2m[36m(train_graphs pid=1639538)[0m NVIDIA A100-PCIE-40GB with CUDA capability sm_80 is not compatible with the current PyTorch installation.
+[2m[36m(train_graphs pid=1639538)[0m The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+[2m[36m(train_graphs pid=1639538)[0m If you want to use the NVIDIA A100-PCIE-40GB GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+[2m[36m(train_graphs pid=1639538)[0m 
+[2m[36m(train_graphs pid=1639538)[0m   warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+[2m[36m(train_graphs pid=1639538)[0m 2022-05-19 10:11:27,836	ERROR function_runner.py:281 -- Runner Thread raised error.
+[2m[36m(train_graphs pid=1639538)[0m Traceback (most recent call last):
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/tune/function_runner.py", line 272, in run
+[2m[36m(train_graphs pid=1639538)[0m     self._entrypoint()
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/tune/function_runner.py", line 351, in entrypoint
+[2m[36m(train_graphs pid=1639538)[0m     self._status_reporter.get_checkpoint(),
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/util/tracing/tracing_helper.py", line 462, in _resume_span
+[2m[36m(train_graphs pid=1639538)[0m     return method(self, *_args, **_kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/tune/function_runner.py", line 640, in _trainable_func
+[2m[36m(train_graphs pid=1639538)[0m     output = fn()
+[2m[36m(train_graphs pid=1639538)[0m   File "Ray_tune.py", line 289, in train_graphs
+[2m[36m(train_graphs pid=1639538)[0m     out = model(batch)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+[2m[36m(train_graphs pid=1639538)[0m     return forward_call(*input, **kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "Ray_tune.py", line 191, in forward
+[2m[36m(train_graphs pid=1639538)[0m     x = self.conv1(x,edge_index,edge_attr)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+[2m[36m(train_graphs pid=1639538)[0m     return forward_call(*input, **kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch_geometric/nn/conv/gatv2_conv.py", line 200, in forward
+[2m[36m(train_graphs pid=1639538)[0m     x_l = self.lin_l(x).view(-1, H, C)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+[2m[36m(train_graphs pid=1639538)[0m     return forward_call(*input, **kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch_geometric/nn/dense/linear.py", line 118, in forward
+[2m[36m(train_graphs pid=1639538)[0m     return F.linear(x, self.weight, self.bias)
+[2m[36m(train_graphs pid=1639538)[0m RuntimeError: CUDA error: no kernel image is available for execution on the device
+[2m[36m(train_graphs pid=1639538)[0m CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+[2m[36m(train_graphs pid=1639538)[0m For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+[2m[36m(train_graphs pid=1639538)[0m Exception in thread Thread-3:
+[2m[36m(train_graphs pid=1639538)[0m Traceback (most recent call last):
+[2m[36m(train_graphs pid=1639538)[0m   File "/mnt/netapp1/Optcesga_FT2_RHEL7/2020/gentoo/22072020/usr/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+[2m[36m(train_graphs pid=1639538)[0m     self.run()
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/tune/function_runner.py", line 298, in run
+[2m[36m(train_graphs pid=1639538)[0m     raise e
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/tune/function_runner.py", line 272, in run
+[2m[36m(train_graphs pid=1639538)[0m     self._entrypoint()
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/tune/function_runner.py", line 351, in entrypoint
+[2m[36m(train_graphs pid=1639538)[0m     self._status_reporter.get_checkpoint(),
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/util/tracing/tracing_helper.py", line 462, in _resume_span
+[2m[36m(train_graphs pid=1639538)[0m     return method(self, *_args, **_kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/ray/tune/function_runner.py", line 640, in _trainable_func
+[2m[36m(train_graphs pid=1639538)[0m     output = fn()
+[2m[36m(train_graphs pid=1639538)[0m   File "Ray_tune.py", line 289, in train_graphs
+[2m[36m(train_graphs pid=1639538)[0m     out = model(batch)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+[2m[36m(train_graphs pid=1639538)[0m     return forward_call(*input, **kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "Ray_tune.py", line 191, in forward
+[2m[36m(train_graphs pid=1639538)[0m     x = self.conv1(x,edge_index,edge_attr)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+[2m[36m(train_graphs pid=1639538)[0m     return forward_call(*input, **kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch_geometric/nn/conv/gatv2_conv.py", line 200, in forward
+[2m[36m(train_graphs pid=1639538)[0m     x_l = self.lin_l(x).view(-1, H, C)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1110, in _call_impl
+[2m[36m(train_graphs pid=1639538)[0m     return forward_call(*input, **kwargs)
+[2m[36m(train_graphs pid=1639538)[0m   File "/home/uvi/ei/mfp/.local/lib/python3.7/site-packages/torch_geometric/nn/dense/linear.py", line 118, in forward
+[2m[36m(train_graphs pid=1639538)[0m     return F.linear(x, self.weight, self.bias)
+[2m[36m(train_graphs pid=1639538)[0m RuntimeError: CUDA error: no kernel image is available for execution on the device
+[2m[36m(train_graphs pid=1639538)[0m CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+[2m[36m(train_graphs pid=1639538)[0m For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+[2m[36m(train_graphs pid=1639538)[0m 
+2022-05-19 10:11:28,239	ERROR trial_runner.py:876 -- Trial train_graphs_26745900: Error processing event.
+NoneType: None
+2022-05-19 10:11:29,113	INFO trial_runner.py:803 -- starting train_graphs_287f5998
+slurmstepd: error: *** JOB 175261 ON a100-17 CANCELLED AT 2022-05-19T10:11:43 DUE TO TIME LIMIT ***
