@@ -1,7 +1,0 @@
-slurmstepd: info: Setting TMPDIR to /scratch/177145. Previous errors about TMPDIR can be discarded
-
-(Ray_tune2.py:1117328): Gdk-CRITICAL **: 19:00:20.525: gdk_cursor_new_for_display: assertion 'GDK_IS_DISPLAY (display)' failed
-Traceback (most recent call last):
-  File "Ray_tune2.py", line 366, in <module>
-    scheduler = AsyncHyperBandScheduler(metric="loss", mode="min", grace_period=10, max_t=1000),
-NameError: name 'AsyncHyperBandScheduler' is not defined
