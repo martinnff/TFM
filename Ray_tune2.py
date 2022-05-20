@@ -29,9 +29,8 @@ from torch.nn.utils import clip_grad_norm_, clip_grad_value_
 from torch_geometric.nn import  GATv2Conv, GraphNorm,  SAGEConv, global_mean_pool, global_max_pool
 from ray import tune
 from ray.tune import CLIReporter
-from ray.tune.schedulers import ASHAScheduler
-from ray.tune.suggest.hyperopt import HyperOptSearch
-
+from ray.tune.schedulers import AsyncHyperBandScheduler
+from ray.tune.suggest.skopt import SkOptSearch
 
 def split_sp(path,seed=1,split=0.9,parcela=0):
     np.random.seed(seed)
@@ -282,7 +281,7 @@ def train_graphs(config):
             drop_last=True)
 
         model.train()
-        for epoch in range(int(config["epoch"])):  # loop over the dataset multiple times
+        for epoch in range(55):  # loop over the dataset multiple times
             running_loss = 0.0
             epoch_steps = 0
             lss=0
@@ -360,7 +359,7 @@ config = {
 
 gpus_per_trial = 0
 print(tune.run(train_graphs,
-    resources_per_trial={"cpu":4, "gpu": gpus_per_trial},
+    resources_per_trial={"cpu":2, "gpu": gpus_per_trial},
     config=config,
     num_samples=256,
     scheduler = AsyncHyperBandScheduler(metric="loss", mode="min", grace_period=10, max_t=1000),
